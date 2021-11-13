@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      
+       <span class="spacer"></span>
+       <a  mat-button  routerLink="/app/password">Password Policy</a>
+       <a  mat-button  routerLink="/app/devex">DevEx</a>
+       <a  mat-button  routerLink="/app/googlemap">Google Map</a>
+       <a  mat-button  routerLink="/app/fileupload">File Upload</a>
+       <a  mat-button (click)="changePassword()">Change Password</a>
+       <a  mat-button *ngIf="currentUserName">{{currentUserName}}</a>
+       <a  mat-button (click)="logOut()">Log Out</a>
+    </mat-toolbar-row>
+ </mat-toolbar>
+<router-outlet></router-outlet>

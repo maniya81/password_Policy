@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Session Expired </h1>
+<div mat-dialog-content>
+    <h3>Please enter password to continue session 
+        OR press cancel to logout</h3>
+    <form [formGroup]="loginForm"class="my-form">  
+        <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input  matInput  placeholder="Email" name="email" readonly formControlName="emailId">
+         </mat-form-field>
+       <mat-form-field class="full-width">
+          <mat-label>Password</mat-label>
+          <input  matInput  placeholder="Password"  name="password" required formControlName="password">
+          <mat-error *ngIf="handleError('password', 'required')">
+            Please Enter <strong> Password</strong>
+          </mat-error>
+       </mat-form-field>
+    </form>
+    <p *ngIf="error"> {{error}}</p>
+    <p *ngIf="message"> Log in sucessfull your token is  {{message}}</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button  color="primary"  [disabled]="!loginForm.valid || message" (click)="onSubmit()" >Login</button>
+    <button mat-raised-button  color="danger"   (click)="logOut()" >Cancel</button>
+</div>

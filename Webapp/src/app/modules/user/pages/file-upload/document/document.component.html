@@ -1,0 +1,53 @@
+
+  <label mat-raised-button class="btn btn-secondary"  style=" margin-left: 130px;margin-top: 8px;"
+  (click)="fileInput.value = null">
+  Upload
+    <input
+      #fileInput
+      type="file"
+      style="display: none"
+      (change)="chooseFile(fileInput.files)"
+    />
+  </label>
+  <div style=" margin-left: 130px;margin-top: 8px;" *ngIf ="uploaded">upload Done</div>
+  <div  style=" margin-left: 130px;margin-top: 8px;" *ngIf ="errorMsg">{{errorMsg}}</div>
+<!-- <button mat-raised-button style="
+margin-left: 130px;
+margin-top: 8px;
+" (click)="fileInput.value = null"> <input
+#fileInput
+type="file"
+style="display: none"
+(change)="chooseFile(fileInput.files)"
+/> Upload </button> -->
+<div class="mat-elevation-z8 data-table">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="fileName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{row.fileName}}</td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element; let i = index;">
+        <button mat-raised-button color="primary" class="push-right" (click)="view(element)">View</button>
+        <button style="margin-left: 10px;" mat-raised-button color="accent" (click)="delete(element)">Delete</button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource?.data?.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>
+</div>

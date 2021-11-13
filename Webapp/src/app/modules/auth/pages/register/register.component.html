@@ -1,0 +1,106 @@
+<mat-toolbar>
+    <span>Registration</span>
+  </mat-toolbar>
+  <mat-card class="my-card">
+     <mat-card-content>
+        <form [formGroup]="registerForm"class="my-form">  
+           <mat-form-field class="full-width">
+              <mat-label>Name</mat-label>
+              <input  matInput  placeholder="Name" name="lname"  required formControlName="name">
+              <mat-error *ngIf="handleError('name', 'required')">
+                Please Enter <strong> Name</strong>
+              </mat-error>
+           </mat-form-field>
+           <mat-form-field class="full-width">
+              <mat-label>Email</mat-label>
+              <input  matInput  placeholder="Email" name="email" required formControlName="emailId">
+              <mat-error *ngIf="handleError('emailId', 'required')">
+              Please Enter  <strong>  Email Id </strong>
+              </mat-error>
+              <mat-error *ngIf="handleError('emailId', 'email')">
+               Please Enter Valid<strong> Email</strong>
+              </mat-error>
+              <mat-error *ngIf="registerFormControl.emailId.dirty && registerFormControl.emailId.errors?.EmailIdNotAvailable">
+                EmailId is not available, Please Enter different email or forgot password
+               </mat-error>
+           </mat-form-field>
+           <mat-form-field class="full-width" style="margin-bottom:100px;">
+              <mat-label>Password</mat-label>
+              <input  matInput  placeholder="Password"  name="password" required formControlName="password">
+              
+              <mat-error *ngIf="handleError('password', 'required')">
+                 Please Enter <strong> Password </strong>
+               </mat-error>
+               <!-- <mat-error *ngIf="registerForm.controls.password.touched">
+                  Password should contain mimnimum legnth{{appliedPassword.minlength}} characters, {{appliedPassword.noOfUppercaseLetters}} No Of uppercase , {{appliedPassword.noOfDigits}}No of digits , {{appliedPassword.noOfSpecialLetters}} no of special characters
+               </mat-error> -->
+               <mat-error style="background-color: rgb(255, 255, 255);" *ngIf="registerForm.controls.password.dirty && registerForm.controls.password.errors && !registerForm.controls.password.errors?.required">
+                 <i class="material-icons">
+                  {{ registerForm.controls.password.errors?.noOfDigits ? 'cancel' : 'check_circle' }}
+                 </i> 
+               Password should contain mimnimum  {{appliedPassword.noOfDigits}} No of digits 
+               <br>
+               <i class="material-icons">
+                  {{ registerForm.controls.password.errors?.noOfSpecialLetters ? 'cancel' : 'check_circle' }}
+                 </i>
+               Password should contain mimnimum  {{appliedPassword.noOfSpecialLetters}} No of special characters  
+               <br>
+               <i class="material-icons">
+                  {{ registerForm.controls.password.errors?.noOfUpperCase ? 'cancel' : 'check_circle' }}
+                 </i>
+               Password should contain mimnimum  {{appliedPassword.noOfUppercaseLetters}} No Of uppercase
+               <br>
+               <i class="material-icons">
+                  {{ registerForm.controls.password.errors?.minLength ? 'cancel' : 'check_circle' }}
+                 </i>
+               Password's mimnimum legnth Should not be less than {{appliedPassword.minlength}} characters
+               <br>
+               <i class="material-icons">
+                  {{ registerForm.controls.password.errors?.maxlength ? 'cancel' : 'check_circle' }}
+                 </i>
+               Password should not more than {{appliedPassword.maxlength}} characters
+             </mat-error>
+             <!-- <mat-error *ngIf="registerForm.controls.password.dirty && registerForm.controls.password.errors">
+               <i class="material-icons">
+                  {{ registerForm.controls.password.errors?.noOfSpecialLetters ? 'cancel' : 'check_circle' }}
+                 </i>
+               Password should contain mimnimum  {{appliedPassword.noOfSpecialLetters}} No of special characters  
+             </mat-error>
+             <mat-error *ngIf="registerForm.controls.password.dirty && registerForm.controls.password.errors">
+               <i class="material-icons">
+                  {{ registerForm.controls.password.errors?.noOfUpperCase ? 'cancel' : 'check_circle' }}
+                 </i>
+               Password should contain mimnimum  {{appliedPassword.noOfUppercaseLetters}} No Of uppercase
+             </mat-error>
+             <mat-error *ngIf="registerForm.controls.password.dirty && registerForm.controls.password.errors">
+               <i class="material-icons">
+                  {{ registerForm.controls.password.errors?.minLength ? 'cancel' : 'check_circle' }}
+                 </i>
+               Password's mimnimum legnth Should not be less than {{appliedPassword.minlength}} characters
+             </mat-error>
+             <mat-error *ngIf="registerForm.controls.password.dirty && registerForm.controls.password.errors" style="margin-bottom:10px;">
+               <i class="material-icons">
+                  {{ registerForm.controls.password.errors?.maxlength ? 'cancel' : 'check_circle' }}
+                 </i>
+               Password should not more than {{appliedPassword.maxlength}} characters
+             </mat-error> -->
+           </mat-form-field>
+
+           <mat-form-field class="full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input  matInput  placeholder="Confirm Password"  name="confirmPassword" required formControlName="confirmPassword">
+            <mat-error *ngIf="handleError('confirmPassword', 'required')">
+               Please Enter <strong> Confirm Password </strong>
+              </mat-error>
+              <mat-error *ngIf="registerForm.controls.confirmPassword.touched && registerForm.controls.confirmPassword.errors?.passwordMismatch">
+               Password not <strong> Matched </strong>
+               </mat-error>
+         </mat-form-field>
+        </form>
+     </mat-card-content>
+     <p *ngIf="error"> {{error}}</p>
+     <p *ngIf="message"> {{message}}</p>
+     <mat-card-actions>
+        <button mat-raised-button  color="primary"  [disabled]="!registerForm.valid" (click)="onSubmit()" >REGISTER</button>
+     </mat-card-actions>
+  </mat-card>

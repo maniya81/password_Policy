@@ -1,0 +1,20 @@
+<h2>Upload File</h2>
+
+<div class="my-2">
+  <label class="btn btn-secondary" (click)="fileInput.value = null">
+    Choose File
+    <input
+      #fileInput
+      type="file"
+      style="display: none"
+      (change)="chooseFile(fileInput.files)"
+    />
+  </label>
+</div>
+<div *ngIf="errorMsg" class="text-danger">
+  {{ errorMsg }}
+</div>
+
+<div  class="text-success" *ngIf="uploaded">
+  <p class="font-weight-bold mb-0">File uploaded</p>
+</div>

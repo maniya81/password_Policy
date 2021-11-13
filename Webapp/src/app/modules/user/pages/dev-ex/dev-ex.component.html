@@ -1,0 +1,39 @@
+<div id="data-grid-demo">
+    <dx-data-grid 
+        id="gridContainer"
+        keyExpr="id"
+        [dataSource]="remoteDataSource"
+        [showBorders]="true"
+        (onEditorPreparing)="onEditorPreparing($event)">        
+
+        <dxo-editing 
+            mode="row"
+            [allowUpdating]="true"
+            [allowAdding]="true"
+            [allowDeleting]="true">
+        </dxo-editing>
+        
+        <dxi-column dataField="firstName"></dxi-column>
+        <dxi-column dataField="lastName"></dxi-column>
+        <dxi-column dataField="position"></dxi-column>
+        <dxi-column
+            dataField="stateID"
+            caption="State"
+            [setCellValue]="setStateValue">  
+            <dxo-lookup 
+                [dataSource]="states"
+                valueExpr="ID"
+                displayExpr="Name">
+            </dxo-lookup>       
+        </dxi-column>
+        <dxi-column 
+            dataField="cityID"
+            caption="City">
+            <dxo-lookup 
+                [dataSource]="getFilteredCities"
+                valueExpr="ID"
+                displayExpr="Name">
+            </dxo-lookup>
+        </dxi-column>
+    </dx-data-grid>
+</div>    

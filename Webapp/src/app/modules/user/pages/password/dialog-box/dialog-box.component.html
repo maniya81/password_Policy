@@ -1,0 +1,80 @@
+<h1 mat-dialog-title> <strong>{{action}} PasswordPolicy</strong></h1>
+<div mat-dialog-content>
+    <div class="inner-wrapper">
+        <form [formGroup]="passwordForm" (ngSubmit)="doAction()" #resetPasswordForm="ngForm" novalidate>
+          <!-- Left block -->
+          <mat-card>
+            <div class="controlers-wrapper">
+              <!-- Name -->
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="PasswordPolicy name" formControlName="policyName">
+                <mat-error *ngIf="handleError('policyName', 'required')">
+                  You must provide a <strong> Password policy Name</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="number" placeholder="Min Length" formControlName="minLength">
+                <mat-error *ngIf="handleError('minLength', 'required')">
+                  You must provide a <strong> minLength</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="number" placeholder="Max Length" formControlName="maxlength">
+                <mat-error *ngIf="handleError('maxlength', 'required')">
+                  You must provide a <strong> Max Length</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="number" placeholder="No Of Uppercase Letters" formControlName="noOfUppercaseLetters">
+                <mat-error *ngIf="handleError('noOfUppercaseLetters', 'required')">
+                  You must provide a <strong> No Of Uppercase Letters</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="number" placeholder="No Of Digits" formControlName="noOfDigits">
+                <mat-error *ngIf="handleError('noOfDigits', 'required')">
+                  You must provide a <strong> No Of Digits </strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="number" placeholder="No Of Special Letters" formControlName="noOfSpecialLetters">
+                <mat-error *ngIf="handleError('noOfSpecialLetters', 'required')">
+                  You must provide a <strong> No Of Special Letters</strong>
+                </mat-error>
+              </mat-form-field>
+            
+              <mat-form-field class="example-full-width">
+                <input matInput type="number" placeholder="Password Age Interval" formControlName="passwordAgeInterval">
+                <mat-error *ngIf="handleError('passwordAgeInterval', 'required')">
+                  You must provide a <strong> Password Age Interval</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input matInput type="number" placeholder="Session Timeout Interval" formControlName="sessionTimeoutInterval">
+                <mat-error *ngIf="handleError('sessionTimeoutInterval', 'required')">
+                  You must provide a <strong> Session Timeout Interval</strong>
+                </mat-error>
+                <mat-error *ngIf="passwordForm.controls.sessionTimeoutInterval.errors?.minimumSessionTimeoutInterval">
+                 Session Timeout Interval Should not be less than 45 
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </mat-card>
+      
+          <!-- Right block -->
+          <mat-card>
+           
+            <div class="controlers-wrapper">
+            <mat-checkbox  formControlName="isInactive" style="margin-right: 10px;">Is InActive 
+            </mat-checkbox>
+            <mat-checkbox  formControlName="isApplied">Is Applied
+            </mat-checkbox>
+        </div>
+        </mat-card>
+        </form>
+      </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>

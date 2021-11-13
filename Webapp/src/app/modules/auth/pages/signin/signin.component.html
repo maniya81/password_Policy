@@ -1,0 +1,32 @@
+<mat-toolbar>
+    <span>Login</span>
+  </mat-toolbar>
+  <mat-card class="my-card">
+     <mat-card-content>
+        <form [formGroup]="loginForm"class="my-form">  
+            <mat-form-field class="full-width">
+                <mat-label>Email</mat-label>
+                <input  matInput  placeholder="Email" name="email" required formControlName="emailId">
+                <mat-error *ngIf="handleError('emailId','required')">
+                Please Enter  <strong>  Email Id </strong>
+                </mat-error>
+                <mat-error *ngIf="handleError('emailId','email')">
+                 Please Enter Valid<strong> Email</strong>
+                </mat-error>
+             </mat-form-field>
+           <mat-form-field class="full-width">
+              <mat-label>Password</mat-label>
+              <input  matInput  placeholder="Password"  name="password" required formControlName="password">
+              <mat-error *ngIf="handleError('password', 'required')">
+                Please Enter <strong> Password</strong>
+              </mat-error>
+           </mat-form-field>
+        </form>
+     </mat-card-content>
+     <p *ngIf="error"> {{error}}</p>
+     <p *ngIf="message"> Log in sucessfull your token is  {{message}}</p>
+     <mat-card-actions>
+        <button mat-raised-button  color="primary"  [disabled]="!loginForm.valid || message" (click)="onSubmit()" >Login</button>
+        <button mat-raised-button  color="danger"   (click)="forgotPassword()" >Forgot Password</button>
+     </mat-card-actions>
+  </mat-card>

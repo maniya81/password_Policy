@@ -1,0 +1,30 @@
+<div *ngIf="isImage">
+    <h1 mat-dialog-title>{{data.fileName}} </h1>
+    <div mat-dialog-content>
+       
+        <img class="images" [src]="docUrl"/>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button  color="primary"  (click)="download()" >Download</button>
+        <button mat-raised-button  color="primary"   (click)="openInFullWindow()">View full image</button>
+        <button mat-raised-button  color="primary"   (click)="close()" >Close</button>
+    </div>
+</div>
+
+<div *ngIf="isPdf">
+    <h1 mat-dialog-title>{{data.fileName}} </h1>
+    <div mat-dialog-content>
+       
+        <pdf-viewer [src]="docUrl"
+        [original-size]="false"
+></pdf-viewer>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button  color="primary"  (click)="download()" >Download</button>
+        <button mat-raised-button  color="primary"   (click)="openInFullWindow()">View in new Window</button>
+        <button mat-raised-button  color="primary"   (click)="close()" >Close</button>
+    </div>
+</div>
+
+
+
